@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+import os 
 import boto3
 
 def check_aws_costs():
@@ -14,7 +15,6 @@ def check_aws_costs():
     )
     cost = response['ResultsByTime'][0]['Total']['BlendedCost']['Amount']
     print(f"Pipeline daily run cost: ${cost}")
-    # In reality, trigger an alert here if cost > threshold
 
 default_args = {
     'owner': 'data_engineering_team',
@@ -31,23 +31,23 @@ with DAG(
     catchup=False
 ) as dag:
 
-    # 1. Run the Async/DuckDB processing script
+    # 1. Point to the new include/ processing directory
     process_telemetry = BashOperator(
         task_id='process_telemetry_duckdb',
-        bash_command='python /opt/airflow/processing/usage_processor.py'
+        bash_command='python /usr/local/airflow/include/processing/usage_processor.py'
     )
 
-    # 2. Run dbt models for SLA reconciliation
+    # 2. Point to the new include/ dbt directory
     run_dbt = BashOperator(
         task_id='run_dbt_models',
-        bash_command='cd /opt/airflow/dbt_ledger_sync && dbt run'
+        bash_command='cd /usr/local/airflow/include/dbt_ledger_sync && dbt run --profiles-dir .',
+        # This forces the bash shell to inherit all container environment variables
+        env={**os.environ} 
     )
 
-    # 3. Sentinel watchdog: Check infrastructure costs
     audit_infrastructure_costs = PythonOperator(
         task_id='audit_infrastructure_costs',
         python_callable=check_aws_costs
     )
 
-    # Define DAG dependencies
     process_telemetry >> run_dbt >> audit_infrastructure_costs

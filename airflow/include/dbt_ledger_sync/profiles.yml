@@ -6,6 +6,7 @@ test:
       http_path: /sql/1.0/warehouses/e34022bc09111f0f
       schema: default
       threads: 1
-      token: dapi36762ebaa9452826070a18a74775dddf
       type: databricks
+      # Use an environment variable securely passed into the Docker container
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN') }}" 
   target: dev
