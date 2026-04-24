@@ -1,0 +1,11 @@
+test:
+  outputs:
+    dev:
+      catalog: test-dev
+      host: dbc-9bf38070-d55e.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/e34022bc09111f0f
+      schema: default
+      threads: 1
+      token: dapi36762ebaa9452826070a18a74775dddf
+      type: databricks
+  target: dev
