@@ -9,3 +9,8 @@ airflow-webserver.pid
 webserver_config.py
 airflow.cfg
 airflow.db
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log

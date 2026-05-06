@@ -1,0 +1,9 @@
+apache-airflow-providers-amazon
+boto3
+pandas
+duckdb
+dbt-core
+dbt-duckdb
+great_expectations
+pydantic
+confluent-kafka

@@ -1,0 +1,1 @@
+{"_invocation_id": "7931fe53-fd0f-4b0c-8a69-0acfb0e3950f", "linked": {"0": {"name": "model.ledger_sync.logistics_sla_reconciliation", "type": "model"}, "1": {"name": "model.ledger_sync.stg_logistics", "type": "model", "succ": [0]}}}

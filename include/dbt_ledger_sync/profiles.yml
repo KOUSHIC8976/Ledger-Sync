@@ -1,0 +1,17 @@
+test:
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      user: postgres
+      pass: postgres
+      port: 5432
+      dbname: postgres
+      schema: public
+      threads: 1
+      keepalives_idle: 0
+      type: duckdb
+      path: ':memory:'
+      extensions:
+        - httpfs
+  target: dev
