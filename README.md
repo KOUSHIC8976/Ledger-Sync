@@ -51,4 +51,23 @@ The `dbt_transform_gold` task connects `dbt-duckdb` to the Silver Parquet data. 
 * Implemented an `empty_poll` timeout in the Kafka consumer to gracefully flush and exit after 5 seconds of silence.
 * Built a pre-flight `list_objects_v2` safety check into the DuckDB processor to cleanly skip execution if the S3 Bronze bucket is empty.
 
+## Usage
 
+### Prerequisites
+Before you begin, ensure you have the following installed:
+*   [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Running)
+*   [Astronomer CLI](https://docs.astronomer.io/astro/cli/install-cli) (`astro`)
+*   [Terraform](https://developer.hashicorp.com/terraform/downloads)
+*   [Python 3.9+](https://www.python.org/downloads/)
+*   AWS IAM User Credentials (with S3 read/write permissions)
+
+```bash
+cd include/aws
+terraform init
+terraform apply -auto-approve
+Update .env file
+astro dev start
+pip install confluent-kafka
+python kafka_logistics_producer.py
+```
+## Navigate to http://localhost:8080
