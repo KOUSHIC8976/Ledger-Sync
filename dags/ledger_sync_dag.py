@@ -9,7 +9,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-with DAG('ledger_sync_kafka', default_args=default_args, schedule='@daily', catchup=False) as dag:
+with DAG('ledger_sync', default_args=default_args, schedule='@daily', catchup=False) as dag:
 
     
     ingest_from_kafka = BashOperator(
