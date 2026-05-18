@@ -12,6 +12,11 @@
 **Ledger Sync** is a fault-tolerant, micro-batch data pipeline built on the Medallion Architecture. It ingests simulated, erratic logistics telemetry via Apache Kafka, quarantines corrupted sensor data using strict data contracts, and calculates rolling delivery SLA breaches using a decoupled OLAP compute engine.
 
 ---
+## Demo
+
+https://github.com/user-attachments/assets/5f0bad66-3dfe-4e2d-a69a-372e6c54dbb5
+
+---
 
 ## Pipeline Architecture
 
